@@ -1,4 +1,5 @@
 import { Button, Container, Typography } from "@mui/material";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Notes = () => {
     return (
@@ -18,6 +19,7 @@ const Notes = () => {
                 type="submit"
                 color="secondary"
                 variant="contained"
+                endIcon={<KeyboardArrowRightIcon/>}
             >
                 Submit
             </Button>
