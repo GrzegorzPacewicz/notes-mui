@@ -1,7 +1,6 @@
-import { BrowserRouter, HashRouter, MemoryRouter, Route, Router, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Notes from "./pages/Notes.jsx";
 import Create from "./pages/Create.jsx";
-import { StaticRouter } from "react-router-dom/server.js";
 
 function App() {
 
