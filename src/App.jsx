@@ -1,16 +1,17 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, MemoryRouter, Route, Router, Routes } from "react-router-dom";
 import Notes from "./pages/Notes.jsx";
 import Create from "./pages/Create.jsx";
+import { StaticRouter } from "react-router-dom/server.js";
 
 function App() {
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
-                <Route path="/" element={<Notes/>}/>
-                <Route path="/create" element={<Create/>}/>
+                <Route exact path="/" element={<Notes/>}/>
+                <Route path="/creat/" element={<Create/>}/>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 
