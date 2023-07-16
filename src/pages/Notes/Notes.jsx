@@ -1,6 +1,6 @@
 import { Button, Container, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { StyledTextField } from "./styled";
+import { StyledTextField } from "./styled.jsx";
 import { useState } from "react";
 
 const Notes = () => {

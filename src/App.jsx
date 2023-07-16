@@ -1,5 +1,5 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import Notes from "./pages/Notes.jsx";
+import Notes from "./pages/Notes/Notes.jsx";
 import Create from "./pages/Create.jsx";
 
 function App() {
