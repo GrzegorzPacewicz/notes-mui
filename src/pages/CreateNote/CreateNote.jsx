@@ -3,7 +3,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { StyledTextField } from "./styled.jsx";
 import { useState } from "react";
 
-const Notes = () => {
+const CreateNote = () => {
 
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
@@ -77,4 +77,4 @@ const Notes = () => {
     );
 };
 
-export default Notes;
+export default CreateNote;

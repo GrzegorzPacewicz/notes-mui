@@ -1,14 +1,17 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import Notes from "./pages/Notes/Notes.jsx";
-import Create from "./pages/Create.jsx";
+import CreateNote from "./pages/CreateNote/CreateNote.jsx";
+import Notes from "./pages/Notes.jsx";
 
 function App() {
 
     return (
         <HashRouter>
             <Routes>
-                <Route exact path="/*" element={<Notes/>}/>
-                <Route path="/create/" element={<Create/>}/>
+                {/*<Route exact path="/*" element={<Notes/>}/>*/}
+                //just for easier opening
+                <Route exact path="/*" element={<CreateNote/>}/>
+
+                <Route path="/create/" element={<CreateNote/>}/>
             </Routes>
         </HashRouter>
     )

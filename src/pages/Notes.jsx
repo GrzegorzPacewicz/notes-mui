@@ -1,6 +1,6 @@
 
 
-const Create = () => {
+const Notes = () => {
      return (
         <div>
            Create page
@@ -8,4 +8,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default Notes;
