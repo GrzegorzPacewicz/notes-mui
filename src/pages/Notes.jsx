@@ -1,14 +1,6 @@
 import { Button, Container, styled, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-const CustomButton = styled(Button)({
-    fontSize: 60,
-    backgroundColor: 'violet',
-    '&:hover':{
-        backgroundColor: 'purple'
-    }
-});
-
 const Notes = () => {
     return (
         <Container>
@@ -17,20 +9,19 @@ const Notes = () => {
                 component="h2"
                 color="textSecondary"
                 gutterBottom
-                sx={{ textDecoration: 'underline', marginBottom: 2, }}
             >
                 Create a New Note
             </Typography>
 
-            <CustomButton
+            <Button
                 onClick={() => console.log('Clicked!')}
                 type="submit"
-                color="secondary"
+                color="primary"
                 variant="contained"
                 endIcon={<KeyboardArrowRightIcon />}
             >
                 Submit
-            </CustomButton>
+            </Button>
         </Container>
     );
 };
