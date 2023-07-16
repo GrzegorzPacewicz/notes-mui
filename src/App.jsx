@@ -1,7 +1,6 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Notes from "./pages/Notes.jsx";
 import Create from "./pages/Create.jsx";
-import {createTheme, ThemeProvider } from "@mui/material/styles";
 
 function App() {
 
