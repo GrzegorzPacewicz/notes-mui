@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Container, Grid, Paper } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import NoteCard from "../../components/NoteCard.jsx";
 
