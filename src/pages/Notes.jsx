@@ -3,7 +3,7 @@ import { Button, Container } from "@mui/material";
 
 const Notes = () => {
     return (
-        <Container>
+        <Container sx={{ marginTop: "20px" }}>
             <Link
                 to="/create"
                 cmpomenent="button"
@@ -11,7 +11,7 @@ const Notes = () => {
             >
                 <Button
                     type="submit"
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                 >
                     Go to Create

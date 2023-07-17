@@ -1,6 +1,6 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { StyledTextField } from "./styled.jsx";
+import { StyledFormControl, StyledTextField } from "./styled.jsx";
 import { useState } from "react";
 
 const CreateNote = () => {
@@ -9,6 +9,7 @@ const CreateNote = () => {
     const [details, setDetails] = useState('');
     const [titleError, setTitleError] = useState(false);
     const [detailsError, setDetailsError] = useState(false);
+    const [category, setCategory] = useState('todos');
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -24,12 +25,14 @@ const CreateNote = () => {
         }
 
         if (title && details) {
-            console.log(title, details)
+            console.log(title, details, category)
         }
     }
 
     return (
+
         <Container>
+
             <Typography
                 variant="h6"
                 component="h2"
@@ -40,6 +43,7 @@ const CreateNote = () => {
             </Typography>
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+
                 <StyledTextField
                     onChange={(event) => setTitle(event.target.value)}
                     variant="outlined"
@@ -50,6 +54,7 @@ const CreateNote = () => {
                     error={titleError}
                 >
                 </StyledTextField>
+
                 <StyledTextField
                     onChange={(event) => setDetails(event.target.value)}
                     variant="outlined"
@@ -62,6 +67,21 @@ const CreateNote = () => {
                     error={detailsError}
                 >
                 </StyledTextField>
+
+                <StyledFormControl>
+                    <FormLabel color="secondary">Note Category</FormLabel>
+                    <RadioGroup
+                        value={category}
+                        onChange={(event) => setCategory(event.target.value)}
+                        color="secondary"
+                    >
+                        <FormControlLabel value="money" control={<Radio color="secondary"  />} label="Money"/>
+                        <FormControlLabel value="todos" control={<Radio color="secondary"/>} label="Todos"/>
+                        <FormControlLabel value="reminders" control={<Radio color="secondary"/>} label="Reminders"/>
+                        <FormControlLabel value="work" control={<Radio color="secondary"/>} label="Work"/>
+                    </RadioGroup>
+                </StyledFormControl>
+
                 <Button
                     type="submit"
                     color="secondary"
@@ -70,7 +90,9 @@ const CreateNote = () => {
                 >
                     Submit
                 </Button>
+
             </form>
+
         </Container>
     );
 };

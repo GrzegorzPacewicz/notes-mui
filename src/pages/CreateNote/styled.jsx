@@ -1,7 +1,10 @@
-import { styled, TextField } from "@mui/material";
+import { FormControl, styled, TextField, Radio } from "@mui/material";
 
-export const StyledTextField = styled(TextField)({
+const createStyledComponent = (component) => styled(component)({
     marginTop: 20,
     marginBottom: 20,
     display: 'block'
 });
+
+export const StyledTextField = createStyledComponent(TextField);
+export const StyledFormControl = createStyledComponent(FormControl);
