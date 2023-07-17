@@ -11,7 +11,7 @@ const Notes = () => {
             >
                 <Button
                     type="submit"
-                    color="primary"
+                    color="secondary"
                     variant="contained"
                 >
                     Go to Create

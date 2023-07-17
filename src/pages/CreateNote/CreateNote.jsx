@@ -48,7 +48,7 @@ const CreateNote = () => {
                     onChange={(event) => setTitle(event.target.value)}
                     variant="outlined"
                     label="Note Title"
-                    color="secondary"
+                    color="primary"
                     fullWidth
                     required
                     error={titleError}
@@ -59,7 +59,7 @@ const CreateNote = () => {
                     onChange={(event) => setDetails(event.target.value)}
                     variant="outlined"
                     label="Details"
-                    color="secondary"
+                    color="primary"
                     multiline
                     rows={4}
                     fullWidth
@@ -69,22 +69,22 @@ const CreateNote = () => {
                 </StyledTextField>
 
                 <StyledFormControl>
-                    <FormLabel color="secondary">Note Category</FormLabel>
+                    <FormLabel>Note Category</FormLabel>
                     <RadioGroup
                         value={category}
                         onChange={(event) => setCategory(event.target.value)}
-                        color="secondary"
+                        color="primary"
                     >
-                        <FormControlLabel value="money" control={<Radio color="secondary"  />} label="Money"/>
-                        <FormControlLabel value="todos" control={<Radio color="secondary"/>} label="Todos"/>
-                        <FormControlLabel value="reminders" control={<Radio color="secondary"/>} label="Reminders"/>
-                        <FormControlLabel value="work" control={<Radio color="secondary"/>} label="Work"/>
+                        <FormControlLabel value="money" control={<Radio/>} label="Money"/>
+                        <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
+                        <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
+                        <FormControlLabel value="work" control={<Radio/>} label="Work"/>
                     </RadioGroup>
                 </StyledFormControl>
 
                 <Button
                     type="submit"
-                    color="secondary"
+                    color="primary"
                     variant="contained"
                     endIcon={<KeyboardArrowRightIcon/>}
                 >
