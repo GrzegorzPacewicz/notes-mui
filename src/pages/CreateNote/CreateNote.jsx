@@ -2,6 +2,7 @@ import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typo
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { StyledFormControl, StyledTextField } from "./styled.jsx";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateNote = () => {
 
@@ -10,6 +11,7 @@ const CreateNote = () => {
     const [titleError, setTitleError] = useState(false);
     const [detailsError, setDetailsError] = useState(false);
     const [category, setCategory] = useState('todos');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -25,7 +27,11 @@ const CreateNote = () => {
         }
 
         if (title && details) {
-            console.log(title, details, category)
+            fetch('http://localhost:8000/notes', {
+                method: 'POST',
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify({ title, details, category })
+            }).then(() => navigate('/'))
         }
     }
 
