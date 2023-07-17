@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Container } from "@mui/material";
+import { Button, Container, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const Notes = () => {
@@ -12,7 +12,6 @@ const Notes = () => {
         fetch('http://localhost:8000/notes')
             .then(res => res.json())
             .then(data => setNotes(data))
-
     }, [])
 
     return (
@@ -30,11 +29,13 @@ const Notes = () => {
                     Go to Create
                 </Button>
             </Link>
-            {notes.map(note => (
-                <p key={note.id}>{note.title}</p>
-
-            ))}
-
+            <Grid container>
+                {notes.map(note => (
+                    <Grid item xs={12} md={6} lg={4} key={note.id}>
+                        <Paper>{note.title}</Paper>
+                    </Grid>
+                ))}
+            </Grid>
         </Container>
     );
 };
