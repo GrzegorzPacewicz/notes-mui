@@ -1,10 +1,16 @@
-import { Box, Drawer, Paper, styled, Typography } from "@mui/material";
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Paper, styled, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import PropTypes from 'prop-types';
+import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const StyledBox = styled(Box)({
+const Root = styled(`div`)({
+    display: 'flex',
+})
+
+const Page = styled(`div`)({
     background: grey[100],
     width: "100%",
 });
@@ -17,14 +23,33 @@ const StyledPaper = styled(Paper)({
     width: drawerWidth
 })
 
-const WrapperBox = styled(Box)({
-    display: 'flex',
-})
+const ActiveListItem = styled(ListItem)(({theme}) => ({
+    '& .MuiListItemIcon-root': {
+        color: theme.palette.primary.main,
+    },
+}));
 
 const Layout = ({children}) => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const menuItems = [
+        {
+            text: 'My Notes',
+            icon: <SubjectOutlined/>,
+            path: '/'
+        },
+        {
+            text: 'Create Note',
+            icon: <AddCircleOutlined/>,
+            path: '/create'
+        }
+    ];
+
     return (
         <>
-            <WrapperBox>
+            <Root>
                 <StyledDrawer
                     variant="permanent"
                     anchor="left"
@@ -35,12 +60,27 @@ const Layout = ({children}) => {
                             Notes
                         </Typography>
                     </div>
+
+                    <List>
+                        {menuItems.map(item => (
+                            <ActiveListItem
+                                button
+                                key={item.text}
+                                onClick={() => navigate(item.path)}
+                                selected={location.pathname === item.path}
+                            >
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText secondary={item.text}/>
+                            </ActiveListItem>
+                        ))}
+                    </List>
+
                 </StyledDrawer>
 
-                <StyledBox>
+                <Page>
                     {children}
-                </StyledBox>
-            </WrapperBox>
+                </Page>
+            </Root>
         </>
     );
 };
