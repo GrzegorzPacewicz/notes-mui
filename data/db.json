@@ -23,6 +23,12 @@
       "details": "Just do it!",
       "category": "todos",
       "id": 4
+    },
+    {
+      "title": "New note",
+      "details": "Yes",
+      "category": "work",
+      "id": 5
     }
   ]
 }
