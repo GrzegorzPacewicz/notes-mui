@@ -71,8 +71,6 @@ const CreateNote = () => {
                     Submit
                 </Button>
             </form>
-
-
         </Container>
     );
 };

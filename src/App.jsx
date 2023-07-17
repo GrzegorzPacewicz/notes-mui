@@ -7,9 +7,9 @@ function App() {
     return (
         <HashRouter>
             <Routes>
-                {/*<Route exact path="/*" element={<Notes/>}/>*/}
+                <Route exact path="/*" element={<Notes/>}/>
                 //just for easier opening
-                <Route exact path="/*" element={<CreateNote/>}/>
+                {/*<Route exact path="/*" element={<CreateNote/>}/>*/}
 
                 <Route path="/create/" element={<CreateNote/>}/>
             </Routes>
