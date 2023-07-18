@@ -25,6 +25,7 @@ const Notes = () => {
 
     return (
         <Container sx={{marginTop: "20px"}}>
+
             <Grid container spacing={3}>
                 {notes.map(note => (
                     <Grid item xs={12} md={6} lg={4} key={note.id}>

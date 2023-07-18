@@ -10,14 +10,16 @@ const Root = styled(`div`)({
     display: 'flex',
 })
 
-const Page = styled(`div`)({
+const Page = styled(`div`)(({theme})=>  ({
     background: grey[100],
     width: "100%",
-});
+    padding: theme.spacing(3)
+}));
 
-const StyledDrawer = styled(Drawer)({
+const StyledDrawer = styled(Drawer)(({theme}) =>  ({
     width: drawerWidth,
-});
+    padding: theme.spacing(0),
+}));
 
 const StyledPaper = styled(Paper)({
     width: drawerWidth
@@ -27,6 +29,10 @@ const ActiveListItem = styled(ListItem)(({theme}) => ({
     '& .MuiListItemIcon-root': {
         color: theme.palette.primary.main,
     },
+}));
+
+const Title = styled(Typography)(({ theme }) => ({
+    padding: theme.spacing(2)
 }));
 
 const Layout = ({children}) => {
@@ -50,16 +56,17 @@ const Layout = ({children}) => {
     return (
         <>
             <Root>
+
                 <StyledDrawer
                     variant="permanent"
                     anchor="left"
                 >
+
                     <StyledPaper/>
-                    <div>
-                        <Typography variant="h5">
+
+                        <Title variant="h5">
                             Notes
-                        </Typography>
-                    </div>
+                        </Title>
 
                     <List>
                         {menuItems.map(item => (
