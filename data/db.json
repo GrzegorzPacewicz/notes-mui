@@ -23,6 +23,12 @@
       "details": "Watch the rest of lessons",
       "category": "work",
       "id": 4
+    },
+    {
+      "title": "Ern some money",
+      "details": "Just earn some mone",
+      "category": "money",
+      "id": 5
     }
   ]
 }

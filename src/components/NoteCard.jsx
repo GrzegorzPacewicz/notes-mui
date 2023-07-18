@@ -6,8 +6,13 @@ const StyledCard = styled(Card)(({theme, note}) => ({
     border:
         note.category === 'work' ? `1px solid ${theme.palette.error.main}`
         : note.category === 'reminders' ? `1px solid blue`
-        : note.category === 'todos' ? `1px solid green`
+        : note.category === 'money' ? `1px solid green`
         : 'none',
+    transition: 'transform 0.5s ease',
+    '&:hover': {
+        transform: 'scale(1.05)',
+    },
+
 }));
 
 // instead the theme you can use it red for example;

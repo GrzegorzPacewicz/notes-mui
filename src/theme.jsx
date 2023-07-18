@@ -1,13 +1,13 @@
 import { createTheme } from "@mui/material";
-import { blue, grey, purple } from "@mui/material/colors";
+import { blue, deepPurple, } from "@mui/material/colors";
 
 export const theme = createTheme({
     palette: {
-        primary: purple,
+        primary: blue,
             // {
             //     main: grey[100]
             // },
-        secondary: blue
+        secondary: deepPurple,
     },
     typography: {
         fontFamily: 'Quicksand',

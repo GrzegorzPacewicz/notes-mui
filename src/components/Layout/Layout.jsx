@@ -1,5 +1,5 @@
 import {
-    AppBar,
+    AppBar, Avatar,
     Drawer,
     List,
     ListItem,
@@ -42,7 +42,7 @@ const StyledPaper = styled(Paper)({
 
 const ActiveListItem = styled(ListItem)(({theme}) => ({
     '& .MuiListItemIcon-root': {
-        color: theme.palette.primary.main,
+        color: theme.palette.secondary.main,
     },
 }))
 
@@ -91,6 +91,7 @@ const Layout = ({children}) => {
                         <Typography variant="h5">
                             Grzegorz
                         </Typography>
+                        <Avatar  sx={{ marginLeft: '16px' }}  src="/icon.png"/>
                     </Toolbar>
                 </StyledAppBar>
 
