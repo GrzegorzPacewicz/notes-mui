@@ -1,21 +1,25 @@
-import { Card, CardContent, CardHeader, IconButton, Typography, styled } from "@mui/material";
+import { Card, CardContent, CardHeader, IconButton, styled, Typography } from "@mui/material";
 import { DeleteOutlined } from "@mui/icons-material";
 import PropTypes from 'prop-types';
 
-const StyledCard = styled(Card)(({ theme, note }) => ({
-    border: note.category === 'work' ? `1px solid ${theme.palette.error.main}` : 'none',
+const StyledCard = styled(Card)(({theme, note}) => ({
+    border:
+        note.category === 'work' ? `1px solid ${theme.palette.error.main}`
+        : note.category === 'reminders' ? `1px solid blue`
+        : note.category === 'todos' ? `1px solid green`
+        : 'none',
 }));
 
 // instead the theme you can use it red for example;
 
-const NoteCard = ({ note, handleDelete }) => {
+const NoteCard = ({note, handleDelete}) => {
     return (
         <div>
             <StyledCard elevation={1} note={note}>
                 <CardHeader
                     action={
                         <IconButton onClick={() => handleDelete(note.id)}>
-                            <DeleteOutlined />
+                            <DeleteOutlined/>
                         </IconButton>
                     }
                     title={note.title}
