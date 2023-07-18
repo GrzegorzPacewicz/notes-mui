@@ -1,10 +1,65 @@
-import { List, ListItemIcon, ListItemText } from "@mui/material";
+import {
+    AppBar,
+    Drawer,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Paper,
+    styled,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import PropTypes from 'prop-types';
 import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LayoutStyles } from "./LayoutStyles.jsx";
+// import { LayoutStyles } from "./LayoutStyles.jsx";
+import { grey } from "@mui/material/colors";
+import { format } from "date-fns";
 
-const {Root, Page, StyledDrawer, StyledPaper, ActiveListItem, Title} = LayoutStyles();
+// const {Root, Page, StyledDrawer, StyledPaper, ActiveListItem, Title} = LayoutStyles();
+
+const drawerWidth = 240;
+
+const Root = styled(`div`)({
+    display: 'flex',
+})
+
+const Page = styled(`div`)(({theme}) => ({
+    background: grey[100],
+    width: "100%",
+    padding: theme.spacing(3)
+}));
+
+const StyledDrawer = styled(Drawer)(({theme}) => ({
+    width: drawerWidth,
+    padding: theme.spacing(0),
+}));
+
+const StyledPaper = styled(Paper)({
+    width: drawerWidth,
+})
+
+const ActiveListItem = styled(ListItem)(({theme}) => ({
+    '& .MuiListItemIcon-root': {
+        color: theme.palette.primary.main,
+    },
+}))
+
+const StyledAppBar = styled(AppBar)({
+    width: `calc(100% - ${drawerWidth}px)`
+});
+
+const Offset = styled('div')(({theme}) => theme.mixins.toolbar);
+
+const Title = styled(Typography)(({theme}) => ({
+    padding: theme.spacing(2)
+}));
+
+const StyledDate = styled(Typography)({
+    flexGrow: 1,
+});
+
 
 const Layout = ({children}) => {
 
@@ -27,6 +82,17 @@ const Layout = ({children}) => {
     return (
         <>
             <Root>
+
+                <StyledAppBar elevation={0}>
+                    <Toolbar>
+                        <StyledDate variant="h5">
+                            Today is the {format(new Date(), `do MMMM Y`)}
+                        </StyledDate>
+                        <Typography variant="h5">
+                            Grzegorz
+                        </Typography>
+                    </Toolbar>
+                </StyledAppBar>
 
                 <StyledDrawer
                     variant="permanent"
@@ -56,8 +122,10 @@ const Layout = ({children}) => {
                 </StyledDrawer>
 
                 <Page>
+                    <Offset/>
                     {children}
                 </Page>
+
             </Root>
         </>
     );
