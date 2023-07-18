@@ -28,7 +28,8 @@ const Root = styled(`div`)({
 const Page = styled(`div`)(({theme}) => ({
     background: grey[100],
     width: "100%",
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    minHeight: '100vh'
 }));
 
 const StyledDrawer = styled(Drawer)(({theme}) => ({
