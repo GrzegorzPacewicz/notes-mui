@@ -13,11 +13,8 @@ import {
 import PropTypes from 'prop-types';
 import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { LayoutStyles } from "./LayoutStyles.jsx";
 import { grey } from "@mui/material/colors";
 import { format } from "date-fns";
-
-// const {Root, Page, StyledDrawer, StyledPaper, ActiveListItem, Title} = LayoutStyles();
 
 const drawerWidth = 240;
 
