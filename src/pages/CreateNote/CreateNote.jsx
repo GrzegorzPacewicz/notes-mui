@@ -1,5 +1,5 @@
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { StyledFormControl, StyledTextField } from "./styled.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
