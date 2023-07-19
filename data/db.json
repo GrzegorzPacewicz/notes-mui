@@ -23,6 +23,23 @@
       "details": "Just earn some mone",
       "category": "money",
       "id": 5
+    },
+    {
+      "title": "Another note",
+      "details": "lorem",
+      "category": "todos",
+      "id": 6
+    },
+    {
+      "title": "Another note",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut debitis dignissimos doloremque eaque eligendi exercitationem expedita fuga, libero magnam maxime natus nesciunt quam quis reprehenderit rerum temporibus velit vero.  ",
+      "category": "money",
+      "id": 7
+    },    {
+      "title": "Another note",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores aut debitis dignissimos doloremque eaque eligendi exercitationem expedita fuga, libero magnam maxime natus nesciunt quam quis reprehenderit rerum temporibus velit vero.  ",
+      "category": "reminders",
+      "id": 8
     }
   ]
 }
