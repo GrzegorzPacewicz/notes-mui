@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateNote = () => {
+
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
     const [titleError, setTitleError] = useState(false);
@@ -13,48 +14,42 @@ const CreateNote = () => {
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        setTitleError(false);
-        setDetailsError(false);
+        event.preventDefault()
+        setTitleError(false)
+        setDetailsError(false)
 
-        if (title.trim() === '') {
-            setTitleError(true);
+        if (title === '') {
+            setTitleError(true)
         }
 
-        if (details.trim() === '') {
-            setDetailsError(true);
+        if (details === '') {
+            setDetailsError(true)
         }
 
-        if (title.trim() && details.trim()) {
-            // Create a new note object with the provided data
-            const newNote = {
-                id: Date.now(), // You can use a unique identifier like the current timestamp
-                title,
-                details,
-                category,
-            };
-
-            // Get existing notes from local storage or initialize an empty array
-            const existingNotes = JSON.parse(localStorage.getItem('notes')) || [];
-
-            // Add the new note to the existing notes array
-            const updatedNotes = [...existingNotes, newNote];
-
-            // Save the updated notes array to local storage
-            localStorage.setItem('notes', JSON.stringify(updatedNotes));
-
-            // Navigate to the home page after saving the note
-            navigate('/');
+        if (title && details) {
+            fetch('http://localhost:8000/notes', {
+                method: 'POST',
+                headers: {"Content-type": "application/json"},
+                body: JSON.stringify({ title, details, category })
+            }).then(() => navigate('/'))
         }
-    };
+    }
 
     return (
+
         <Container>
-            <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
+
+            <Typography
+                variant="h6"
+                component="h2"
+                color="textSecondary"
+                gutterBottom
+            >
                 Create a New Note
             </Typography>
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+
                 <StyledTextField
                     onChange={(event) => setTitle(event.target.value)}
                     variant="outlined"
@@ -63,7 +58,8 @@ const CreateNote = () => {
                     fullWidth
                     required
                     error={titleError}
-                />
+                >
+                </StyledTextField>
 
                 <StyledTextField
                     onChange={(event) => setDetails(event.target.value)}
@@ -75,7 +71,8 @@ const CreateNote = () => {
                     fullWidth
                     required
                     error={detailsError}
-                />
+                >
+                </StyledTextField>
 
                 <StyledFormControl>
                     <FormLabel>Note Category</FormLabel>
@@ -84,10 +81,10 @@ const CreateNote = () => {
                         onChange={(event) => setCategory(event.target.value)}
                         color="primary"
                     >
-                        <FormControlLabel value="money" control={<Radio />} label="Money" />
-                        <FormControlLabel value="todos" control={<Radio />} label="Todos" />
-                        <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
-                        <FormControlLabel value="work" control={<Radio />} label="Work" />
+                        <FormControlLabel value="money" control={<Radio/>} label="Money"/>
+                        <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
+                        <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
+                        <FormControlLabel value="work" control={<Radio/>} label="Work"/>
                     </RadioGroup>
                 </StyledFormControl>
 
@@ -95,11 +92,13 @@ const CreateNote = () => {
                     type="submit"
                     color="primary"
                     variant="contained"
-                    endIcon={<KeyboardArrowRightIcon />}
+                    endIcon={<KeyboardArrowRightIcon/>}
                 >
                     Submit
                 </Button>
+
             </form>
+
         </Container>
     );
 };
