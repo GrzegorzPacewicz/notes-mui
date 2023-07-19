@@ -1,40 +1,31 @@
-import { Container, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import NoteCard from "../../components/NoteCard.jsx";
+import { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
+import NoteCard from '../../components/NoteCard';
 import Masonry from '@mui/lab/Masonry';
 
 const Notes = () => {
-
-    const [notes, setNotes] = useState([])
-
-    // json-server --watch data/db.json --port 8000
+    const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/notes')
-            .then(res => res.json())
-            .then(data => setNotes(data))
-    }, [])
+        const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        setNotes(storedNotes);
+    }, []);
 
-    const handleDelete = async (id) => {
-        await fetch('http://localhost:8000/notes/' + id, {
-            method: 'DELETE'
-        })
-
-        const newNotes = notes.filter(note => note.id !== id)
-        setNotes(newNotes)
-    }
+    const handleDelete = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
+        localStorage.setItem('notes', JSON.stringify(newNotes));
+    };
 
     return (
-        <Container sx={{marginTop: "20px"}}>
-
+        <Container sx={{ marginTop: '20px' }}>
             <Masonry spacing={3} columns={{ xs: 1, md: 2, lg: 3 }}>
-                    {notes.map(note => (
-                        <div key={note.id}>
-                            <NoteCard note={note} handleDelete={handleDelete}/>
-                        </div>
-                    ))}
+                {notes.map((note) => (
+                    <div key={note.id}>
+                        <NoteCard note={note} handleDelete={handleDelete} />
+                    </div>
+                ))}
             </Masonry>
-
         </Container>
     );
 };
