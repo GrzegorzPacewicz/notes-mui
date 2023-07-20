@@ -51,7 +51,7 @@ const NoteCard = ({note, handleDelete}) => {
 
 NoteCard.propTypes = {
     note: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
         details: PropTypes.string.isRequired
