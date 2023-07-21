@@ -28,7 +28,6 @@ function Layout(props) {
 
     const navigate = useNavigate();
     const location = useLocation();
-    // const isXs = useMediaQuery((theme) => theme.breakpoints.down('xs'));
 
     const menuItems = [
         {
@@ -91,7 +90,7 @@ function Layout(props) {
                     </IconButton>
 
                     <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-around',}}>
-                        <StyledDate variant="h6" sx={{ mr: 2} }>
+                        <StyledDate variant="body2" sx={{ mr: 2} }>
                             Today is the {format(new Date(), `do MMMM Y`)}
                         </StyledDate>
                         <Typography variant="h6">
