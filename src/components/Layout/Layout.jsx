@@ -2,21 +2,19 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { AddCircleOutlined, SubjectOutlined } from "@mui/icons-material";
-import { Avatar, Container, Paper, styled, useMediaQuery } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { grey } from "@mui/material/colors";
 import { format } from "date-fns";
+import { ActiveListItem, Page, StyledDate } from "./styled";
 
 const drawerWidth = 240;
 
@@ -30,8 +28,7 @@ function Layout(props) {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const isXs = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-
+    // const isXs = useMediaQuery((theme) => theme.breakpoints.down('xs'));
 
     const menuItems = [
         {
@@ -45,24 +42,6 @@ function Layout(props) {
             path: '/create'
         }
     ];
-
-    const ActiveListItem = styled(ListItem)(({theme}) => ({
-        '& .MuiListItemIcon-root': {
-            color: theme.palette.secondary.main,
-        },
-    }))
-
-    const Page = styled(`div`)(({theme}) => ({
-        background: grey[100],
-        width: "100%",
-        padding: theme.spacing(3),
-        minHeight: '100vh'
-    }));
-
-
-    const StyledDate = styled(Typography)({
-        flexGrow: 3,
-    });
 
     const drawer = (
         <div>
@@ -92,7 +71,6 @@ function Layout(props) {
 
     return (
         <Box sx={{display: 'flex'}}>
-            <CssBaseline/>
             <AppBar
                 elevation={0}
                 position="fixed"
@@ -121,9 +99,9 @@ function Layout(props) {
                         </Typography>
                         <Avatar src="/icon.png" sx={{ ml: 2 }} />
                     </Box>
-
                 </Toolbar>
             </AppBar>
+
             <Box
                 component="nav"
                 sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
