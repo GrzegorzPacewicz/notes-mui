@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
-import NoteCard from '../../components/NoteCard';
+import NoteCard from '../../components/NoteCard/NoteCard.jsx';
 import Masonry from '@mui/lab/Masonry';
 
 const Notes = () => {
