@@ -2,6 +2,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import CreateNote from "./pages/CreateNote/CreateNote.jsx";
 import Notes from "./pages/Notes/Notes.jsx";
 import Layout from "./components/Layout/Layout.jsx";
+import EditNote from "./components/EditCard/EditNote.jsx";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
                 <Routes>
                     <Route exact path="/*" element={<Notes/>}/>
                     <Route path="/create/" element={<CreateNote/>}/>
+                    <Route path="/edit/:id" element={<EditNote />} />
                 </Routes>
             </Layout>
         </HashRouter>
