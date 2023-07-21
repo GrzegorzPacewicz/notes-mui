@@ -1,4 +1,4 @@
-import { CardContent, CardHeader, IconButton, styled, Typography } from "@mui/material";
+import { CardContent, CardHeader, IconButton, Typography } from "@mui/material";
 import { DeleteOutlined } from "@mui/icons-material";
 import PropTypes from 'prop-types';
 import { StyledAvatar, StyledCard } from "./styled.jsx";
