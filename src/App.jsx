@@ -1,18 +1,18 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 import CreateNote from "./pages/CreateNote/CreateNote.jsx";
 import Notes from "./pages/Notes/Notes.jsx";
+import OldLayout from "./components/Layout/OldLayout.jsx";
 import Layout from "./components/Layout/Layout.jsx";
-import NewLayout from "./components/Layout/NewLayout.jsx";
 
 function App() {
     return (
         <HashRouter>
-            <NewLayout>
+            <Layout>
                 <Routes>
                     <Route exact path="/*" element={<Notes/>}/>
                     <Route path="/create/" element={<CreateNote/>}/>
                 </Routes>
-            </NewLayout>
+            </Layout>
         </HashRouter>
     )
 }
