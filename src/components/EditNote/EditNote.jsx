@@ -3,9 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const EditNote = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [note, setNote] = useState(null);
     const navigate = useNavigate();
 
@@ -27,8 +28,12 @@ const EditNote = () => {
         fetchNoteById();
     }, [fetchNoteById]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        const {name, value} = event.target;
         setNote({
             ...note,
             [name]: value,
@@ -105,10 +110,10 @@ const EditNote = () => {
                                 color="primary"
                                 name="category"
                             >
-                                <FormControlLabel value="money" control={<Radio />} label="Money" />
-                                <FormControlLabel value="todos" control={<Radio />} label="Todos" />
-                                <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
-                                <FormControlLabel value="work" control={<Radio />} label="Work" />
+                                <FormControlLabel value="money" control={<Radio/>} label="Money"/>
+                                <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
+                                <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
+                                <FormControlLabel value="work" control={<Radio/>} label="Work"/>
                             </RadioGroup>
                         </StyledFormControl>
 
@@ -116,15 +121,16 @@ const EditNote = () => {
                             type="submit"
                             color="primary"
                             variant="contained"
-                            endIcon={<KeyboardArrowRightIcon />}
+                            endIcon={<KeyboardArrowRightIcon/>}
                         >
                             Submit
                         </Button>
                         <Button
-                            color="secondary"
+                            color="warning"
                             variant="contained"
                             onClick={handleDelete}
-                            style={{ marginLeft: "1rem" }}
+                            style={{marginLeft: "1rem"}}
+                            endIcon={<DeleteOutlineOutlinedIcon/>}
                         >
                             Delete
                         </Button>

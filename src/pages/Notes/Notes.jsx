@@ -11,6 +11,9 @@ const Notes = () => {
         setNotes(storedNotes);
     }, []);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const handleDelete = (id) => {
         const newNotes = notes.filter((note) => note.id !== id);
         setNotes(newNotes);
@@ -18,11 +21,11 @@ const Notes = () => {
     };
 
     return (
-        <Container sx={{ marginTop: '20px' }}>
-            <Masonry spacing={3} columns={{ xs: 1, md: 2, lg: 3 }}>
+        <Container sx={{marginTop: '20px'}}>
+            <Masonry spacing={3} columns={{xs: 1, md: 2, lg: 3}}>
                 {notes.map((note) => (
                     <div key={note.id}>
-                        <NoteCard note={note} handleDelete={handleDelete} />
+                        <NoteCard note={note} handleDelete={handleDelete}/>
                     </div>
                 ))}
             </Masonry>
