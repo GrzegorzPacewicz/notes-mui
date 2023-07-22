@@ -1,9 +1,9 @@
 import  { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { nanoid } from "nanoid";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { StyledFormControl, StyledTextField } from './styled';
-import { useNavigate } from 'react-router-dom';
-import { nanoid } from "nanoid";
 
 const CreateNote = () => {
     const [title, setTitle] = useState('');

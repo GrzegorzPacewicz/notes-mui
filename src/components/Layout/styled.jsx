@@ -1,7 +1,6 @@
 import { styled } from "@mui/material";
-import ListItem from "@mui/material/ListItem";
+import { ListItem, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import Typography from "@mui/material/Typography";
 
 export const ActiveListItem = styled(ListItem)(({theme}) => ({
     '& .MuiListItemIcon-root': {

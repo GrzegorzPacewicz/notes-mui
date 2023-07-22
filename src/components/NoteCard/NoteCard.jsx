@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from "react-router-dom";
 import { StyledAvatar, StyledCard } from "./styled.jsx";
 import { CardContent, CardHeader, IconButton, Typography } from "@mui/material";
 import { DeleteOutlined, EditOutlined } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
 
 
 const NoteCard = ({note, handleDelete}) => {
@@ -15,16 +15,14 @@ const NoteCard = ({note, handleDelete}) => {
                 <CardHeader
                     avatar={<StyledAvatar note={note}>{note.category[0].toUpperCase()}</StyledAvatar>}
                     action={
-                        <div>
-                            {/*<Link to={`/edit/${note.id}`}>*/}
-                                <IconButton onClick={() => navigate(`/edit/${note.id}`)}>
-                                    <EditOutlined/>
-                                </IconButton>
-                            {/*</Link>*/}
+                        <>
+                            <IconButton onClick={() => navigate(`/edit/${note.id}`)}>
+                                <EditOutlined/>
+                            </IconButton>
                             <IconButton onClick={() => handleDelete(note.id)}>
                                 <DeleteOutlined/>
                             </IconButton>
-                        </div>
+                        </>
                     }
                     title={note.title}
                     subheader={note.category}
