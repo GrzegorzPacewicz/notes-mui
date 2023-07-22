@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 const EditNote = () => {
     const {id} = useParams();
@@ -130,7 +130,7 @@ const EditNote = () => {
                             variant="contained"
                             onClick={handleDelete}
                             style={{marginLeft: "1rem"}}
-                            endIcon={<DeleteOutlineOutlinedIcon/>}
+                            endIcon={<DeleteOutlinedIcon />}
                         >
                             Delete
                         </Button>

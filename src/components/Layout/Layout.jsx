@@ -45,6 +45,12 @@ function Layout(props) {
         }
     ];
 
+    const handleListItemClick = () => {
+        if (mobileOpen) {
+            handleDrawerToggle();
+        }
+    };
+
     const drawer = (
         <div>
             <Toolbar>
@@ -58,11 +64,14 @@ function Layout(props) {
                     <ActiveListItem
                         button
                         key={item.text}
-                        onClick={() => navigate(item.path)}
+                        onClick={() => {
+                            navigate(item.path);
+                            handleListItemClick();
+                        }}
                         selected={location.pathname === item.path}
                     >
                         <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText secondary={item.text}/>
+                        <ListItemText secondary={item.text} />
                     </ActiveListItem>
                 ))}
             </List>
