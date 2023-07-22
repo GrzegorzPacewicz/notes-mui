@@ -4,7 +4,6 @@ import { StyledAvatar, StyledCard } from "./styled.jsx";
 import { CardContent, CardHeader, IconButton, Typography } from "@mui/material";
 import { DeleteOutlined, EditOutlined } from "@mui/icons-material";
 
-
 const NoteCard = ({note, handleDelete}) => {
 
     const navigate = useNavigate();

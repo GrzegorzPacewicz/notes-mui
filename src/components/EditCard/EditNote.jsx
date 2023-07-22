@@ -49,7 +49,18 @@ const EditNote = () => {
                 console.log("Note not found.");
             }
         } catch (error) {
-                 console.error("Error updating note:", error);
+            console.error("Error updating note:", error);
+        }
+    };
+
+    const handleDelete = () => {
+        try {
+            let notes = JSON.parse(localStorage.getItem("notes")) || [];
+            notes = notes.filter((note) => note.id !== id);
+            localStorage.setItem("notes", JSON.stringify(notes));
+            navigate("/");
+        } catch (error) {
+            console.error("Error deleting note:", error);
         }
     };
 
@@ -84,8 +95,8 @@ const EditNote = () => {
                             required
                             onChange={handleChange}
                             name="details"
-                        >
-                        </StyledTextField>
+                        />
+
                         <StyledFormControl>
                             <FormLabel>Note Category</FormLabel>
                             <RadioGroup
@@ -94,10 +105,10 @@ const EditNote = () => {
                                 color="primary"
                                 name="category"
                             >
-                                <FormControlLabel value="money" control={<Radio/>} label="Money"/>
-                                <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
-                                <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
-                                <FormControlLabel value="work" control={<Radio/>} label="Work"/>
+                                <FormControlLabel value="money" control={<Radio />} label="Money" />
+                                <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+                                <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
+                                <FormControlLabel value="work" control={<Radio />} label="Work" />
                             </RadioGroup>
                         </StyledFormControl>
 
@@ -105,9 +116,17 @@ const EditNote = () => {
                             type="submit"
                             color="primary"
                             variant="contained"
-                            endIcon={<KeyboardArrowRightIcon
-                            />}>
+                            endIcon={<KeyboardArrowRightIcon />}
+                        >
                             Submit
+                        </Button>
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            onClick={handleDelete}
+                            style={{ marginLeft: "1rem" }}
+                        >
+                            Delete
                         </Button>
                     </form>
                 </Container>
