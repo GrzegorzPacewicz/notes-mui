@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight.js";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const EditNote = () => {
     const { id } = useParams();
@@ -11,7 +11,7 @@ const EditNote = () => {
 
     useEffect(() => {
         fetchNoteById(id);
-    }, [id]);
+    }, [id, fetchNoteById]);
 
     const fetchNoteById = () => {
         try {
