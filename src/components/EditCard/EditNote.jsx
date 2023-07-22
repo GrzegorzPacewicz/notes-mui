@@ -1,27 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight.js";
-import { nanoid } from "nanoid";
 
 const EditNote = () => {
     const {id} = useParams(); // Access the note ID from the URL params
     const [note, setNote] = useState(null); // State to hold the note data
+    const navigate = useNavigate();
 
-    // Effect to fetch the note data from local storage when the component mounts
     useEffect(() => {
         fetchNoteById(id);
     }, [id]);
 
-    // Function to fetch the note data by ID from local storage
     const fetchNoteById = () => {
         try {
             // Retrieve the notes data from local storage
             const notes = JSON.parse(localStorage.getItem("notes")) || [];
 
             // Find the note with the matching ID
-            const foundNote = notes.find((n) => n.id === id);
+            const foundNote = notes.find((note) => note.id === id);
 
             if (foundNote) {
                 setNote(foundNote); // Update the state with the found note data
@@ -35,37 +33,55 @@ const EditNote = () => {
         }
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setTitleError(false);
-        setDetailsError(false);
+    const handleChangeTitle = (event) => {
+        setNote({
+            ...note,
+            title: event.target.value,
 
-        if (title.trim() === '') {
-            setTitleError(true);
-        }
-
-        if (details.trim() === '') {
-            setDetailsError(true);
-        }
-
-        if (title.trim() && details.trim()) {
-            const newNote = {
-                id: nanoid(),
-                title: title.trim(),
-                details: details.trim(),
-                category,
-            };
-
-            const existingNotes = JSON.parse(localStorage.getItem('notes')) || [];
-            const updatedNotes = [...existingNotes, newNote];
-            localStorage.setItem('notes', JSON.stringify(updatedNotes));
-
-            setTitle('');
-            setDetails('');
-            navigate('/');
-        }
+        });
     };
 
+    const handleChangeDetails = (event) => {
+        setNote({
+            ...note,
+            details: event.target.value,
+        });
+    };
+    const handleChangeCategory = (event) => {
+        setNote({
+            ...note,
+            category: event.target.value,
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        try {
+            // Retrieve the notes data from local storage
+            const notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            // Find the index of the note with the matching ID
+            const noteIndex = notes.findIndex((n) => n.id === id);
+
+            if (noteIndex !== -1) {
+                // Update the note in the notes array
+                notes[noteIndex] = note;
+
+                // Save the updated notes array back to local storage
+                localStorage.setItem("notes", JSON.stringify(notes));
+
+                // Navigate back to the notes list page after successful update
+                navigate("/");
+            } else {
+                // Handle the case when the note with the provided ID is not found
+                console.log("Note not found.");
+            }
+        } catch (error) {
+            // Handle errors if any
+            console.error("Error updating note:", error);
+        }
+    };
 
     return (
         <div>
@@ -77,7 +93,7 @@ const EditNote = () => {
 
                     <form
                         noValidate autoComplete="off"
-                        // onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
                     >
                         <StyledTextField
                             value={note.title}
@@ -86,6 +102,7 @@ const EditNote = () => {
                             color="primary"
                             fullWidth
                             required
+                            onChange={handleChangeTitle}
                         />
 
                         <StyledTextField
@@ -97,17 +114,18 @@ const EditNote = () => {
                             rows={4}
                             fullWidth
                             required
+                            onChange={handleChangeDetails}
                         >
                         </StyledTextField>
                         <StyledFormControl>
                             <FormLabel>Note Category</FormLabel>
                             <RadioGroup value={note.category}
-                                        // onChange={(event) => setCategory(event.target.value)}
-                                color="primary">
-                                <FormControlLabel value="money" control={<Radio />} label="Money" />
-                                <FormControlLabel value="todos" control={<Radio />} label="Todos" />
-                                <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
-                                <FormControlLabel value="work" control={<Radio />} label="Work" />
+                                        onChange={handleChangeCategory}
+                                        color="primary">
+                                <FormControlLabel value="money" control={<Radio/>} label="Money"/>
+                                <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
+                                <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
+                                <FormControlLabel value="work" control={<Radio/>} label="Work"/>
                             </RadioGroup>
                         </StyledFormControl>
 
