@@ -5,8 +5,8 @@ import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/style
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight.js";
 
 const EditNote = () => {
-    const {id} = useParams(); // Access the note ID from the URL params
-    const [note, setNote] = useState(null); // State to hold the note data
+    const { id } = useParams();
+    const [note, setNote] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const EditNote = () => {
             const foundNote = notes.find((note) => note.id === id);
 
             if (foundNote) {
-                setNote(foundNote); // Update the state with the found note data
+                setNote(foundNote);
             } else {
                 // Handle the case when the note with the provided ID is not found
                 console.log("Note not found.");
@@ -33,24 +33,11 @@ const EditNote = () => {
         }
     };
 
-    const handleChangeTitle = (event) => {
+    const handleChange = (event) => {
+        const { name, value } = event.target;
         setNote({
             ...note,
-            title: event.target.value,
-
-        });
-    };
-
-    const handleChangeDetails = (event) => {
-        setNote({
-            ...note,
-            details: event.target.value,
-        });
-    };
-    const handleChangeCategory = (event) => {
-        setNote({
-            ...note,
-            category: event.target.value,
+            [name]: value,
         });
     };
 
@@ -74,7 +61,7 @@ const EditNote = () => {
                 // Navigate back to the notes list page after successful update
                 navigate("/");
             } else {
-                // Handle the case when the note with the provided ID is not found
+                // If the note with the provided ID is not found
                 console.log("Note not found.");
             }
         } catch (error) {
@@ -91,10 +78,7 @@ const EditNote = () => {
                         Edit the Note
                     </Typography>
 
-                    <form
-                        noValidate autoComplete="off"
-                        onSubmit={handleSubmit}
-                    >
+                    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                         <StyledTextField
                             value={note.title}
                             variant="outlined"
@@ -102,7 +86,8 @@ const EditNote = () => {
                             color="primary"
                             fullWidth
                             required
-                            onChange={handleChangeTitle}
+                            onChange={handleChange}
+                            name="title"
                         />
 
                         <StyledTextField
@@ -114,26 +99,24 @@ const EditNote = () => {
                             rows={4}
                             fullWidth
                             required
-                            onChange={handleChangeDetails}
+                            onChange={handleChange}
+                            name="details"
                         >
                         </StyledTextField>
                         <StyledFormControl>
                             <FormLabel>Note Category</FormLabel>
-                            <RadioGroup value={note.category}
-                                        onChange={handleChangeCategory}
-                                        color="primary">
-                                <FormControlLabel value="money" control={<Radio/>} label="Money"/>
-                                <FormControlLabel value="todos" control={<Radio/>} label="Todos"/>
-                                <FormControlLabel value="reminders" control={<Radio/>} label="Reminders"/>
-                                <FormControlLabel value="work" control={<Radio/>} label="Work"/>
+                            <RadioGroup value={note.category} onChange={handleChange} color="primary" name="category">
+                                <FormControlLabel value="money" control={<Radio />} label="Money" />
+                                <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+                                <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
+                                <FormControlLabel value="work" control={<Radio />} label="Work" />
                             </RadioGroup>
                         </StyledFormControl>
 
-                        <Button type="submit" color="primary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>
+                        <Button type="submit" color="primary" variant="contained" endIcon={<KeyboardArrowRightIcon />}>
                             Submit
                         </Button>
                     </form>
-
                 </Container>
             ) : (
                 <p>Loading...</p>
