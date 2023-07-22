@@ -62,7 +62,7 @@ const EditNote = () => {
             const notes = JSON.parse(localStorage.getItem("notes")) || [];
 
             // Find the index of the note with the matching ID
-            const noteIndex = notes.findIndex((n) => n.id === id);
+            const noteIndex = notes.findIndex((note) => note.id === id);
 
             if (noteIndex !== -1) {
                 // Update the note in the notes array
