@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight.js";
+import { nanoid } from "nanoid";
 
 const EditNote = () => {
-    const { id } = useParams(); // Access the note ID from the URL params
+    const {id} = useParams(); // Access the note ID from the URL params
     const [note, setNote] = useState(null); // State to hold the note data
 
     // Effect to fetch the note data from local storage when the component mounts
@@ -31,16 +35,88 @@ const EditNote = () => {
         }
     };
 
-    // JSX structure to display the note for editing (You can use Material-UI components as needed)
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setTitleError(false);
+        setDetailsError(false);
+
+        if (title.trim() === '') {
+            setTitleError(true);
+        }
+
+        if (details.trim() === '') {
+            setDetailsError(true);
+        }
+
+        if (title.trim() && details.trim()) {
+            const newNote = {
+                id: nanoid(),
+                title: title.trim(),
+                details: details.trim(),
+                category,
+            };
+
+            const existingNotes = JSON.parse(localStorage.getItem('notes')) || [];
+            const updatedNotes = [...existingNotes, newNote];
+            localStorage.setItem('notes', JSON.stringify(updatedNotes));
+
+            setTitle('');
+            setDetails('');
+            navigate('/');
+        }
+    };
+
+
     return (
         <div>
             {note ? (
-                <div>
-                    {/* Display the note data for editing */}
-                    <h1>{note.title}</h1>
-                    <p>{note.category}</p>
-                    <p>{note.details}</p>
-                </div>
+                <Container>
+                    <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
+                        Edit the Note
+                    </Typography>
+
+                    <form
+                        noValidate autoComplete="off"
+                        // onSubmit={handleSubmit}
+                    >
+                        <StyledTextField
+                            value={note.title}
+                            variant="outlined"
+                            label="Note Title"
+                            color="primary"
+                            fullWidth
+                            required
+                        />
+
+                        <StyledTextField
+                            value={note.details}
+                            variant="outlined"
+                            label="Details"
+                            color="primary"
+                            multiline
+                            rows={4}
+                            fullWidth
+                            required
+                        >
+                        </StyledTextField>
+                        <StyledFormControl>
+                            <FormLabel>Note Category</FormLabel>
+                            <RadioGroup value={note.category}
+                                        // onChange={(event) => setCategory(event.target.value)}
+                                color="primary">
+                                <FormControlLabel value="money" control={<Radio />} label="Money" />
+                                <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+                                <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
+                                <FormControlLabel value="work" control={<Radio />} label="Work" />
+                            </RadioGroup>
+                        </StyledFormControl>
+
+                        <Button type="submit" color="primary" variant="contained" endIcon={<KeyboardArrowRightIcon/>}>
+                            Submit
+                        </Button>
+                    </form>
+
+                </Container>
             ) : (
                 <p>Loading...</p>
             )}
