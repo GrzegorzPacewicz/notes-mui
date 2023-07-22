@@ -9,6 +9,7 @@ const EditNote = () => {
     const {id} = useParams();
     const [note, setNote] = useState(null);
     const navigate = useNavigate();
+    const [validationError, setValidationError] = useState(null);
 
     const fetchNoteById = useCallback(() => {
         try {
@@ -43,6 +44,11 @@ const EditNote = () => {
     const handleEdit = (event) => {
         event.preventDefault();
 
+        if (!note.title.trim() || !note.details.trim()) {
+            setValidationError("Please fill in both the title and details.");
+            return;
+        }
+
         try {
             const notes = JSON.parse(localStorage.getItem("notes")) || [];
             const noteIndex = notes.findIndex((note) => note.id === id);
@@ -57,6 +63,7 @@ const EditNote = () => {
             console.error("Error updating note:", error);
         }
     };
+
 
     const handleDelete = () => {
         try {
@@ -76,6 +83,12 @@ const EditNote = () => {
                     <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
                         Edit the Note
                     </Typography>
+
+                    {validationError && (
+                        <Typography variant="body2" color="error" gutterBottom>
+                            {validationError}
+                        </Typography>
+                    )}
 
                     <form noValidate autoComplete="off" onSubmit={handleEdit}>
                         <StyledTextField
@@ -130,7 +143,7 @@ const EditNote = () => {
                             variant="contained"
                             onClick={handleDelete}
                             style={{marginLeft: "1rem"}}
-                            endIcon={<DeleteOutlinedIcon />}
+                            endIcon={<DeleteOutlinedIcon/>}
                         >
                             Delete
                         </Button>
