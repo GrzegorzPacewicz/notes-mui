@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
@@ -9,11 +9,7 @@ const EditNote = () => {
     const [note, setNote] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchNoteById(id);
-    }, [id, fetchNoteById]);
-
-    const fetchNoteById = () => {
+    const fetchNoteById = useCallback(() => {
         try {
             const notes = JSON.parse(localStorage.getItem("notes")) || [];
             const foundNote = notes.find((note) => note.id === id);
@@ -25,7 +21,11 @@ const EditNote = () => {
         } catch (error) {
             console.error("Error fetching note:", error);
         }
-    };
+    }, [id]);
+
+    useEffect(() => {
+        fetchNoteById();
+    }, [fetchNoteById]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,7 +35,7 @@ const EditNote = () => {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleEdit = (event) => {
         event.preventDefault();
 
         try {
@@ -61,7 +61,7 @@ const EditNote = () => {
                         Edit the Note
                     </Typography>
 
-                    <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+                    <form noValidate autoComplete="off" onSubmit={handleEdit}>
                         <StyledTextField
                             value={note.title}
                             variant="outlined"
