@@ -1,16 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-    Box,
-    Button,
-    Container,
-    FormControlLabel,
-    FormLabel,
-    Paper,
-    Radio,
-    RadioGroup,
-    Typography
-} from "@mui/material";
+import { Box, Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
