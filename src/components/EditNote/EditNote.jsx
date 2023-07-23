@@ -72,7 +72,6 @@ const EditNote = () => {
         }
     };
 
-
     const handleDelete = () => {
         try {
             let notes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -92,7 +91,7 @@ const EditNote = () => {
                         Edit the Note
                         {titleError || detailsError ? (
                             <Typography variant="body2" color="error">
-                                {titleError && "Please enter a title. "}
+                                {titleError && "Please enter a title."}
                                 {detailsError && "Please enter details."}
                             </Typography>
                         ) : null}
@@ -140,21 +139,20 @@ const EditNote = () => {
 
                         <Box sx={{display: 'flex', justifyContent: 'left', gap: "1rem"}}>
                             <Button
-                                color="warning"
-                                variant="contained"
-                                onClick={handleDelete}
-                                endIcon={<DeleteOutlinedIcon/>}
-                            >
-                                Delete
-                            </Button>
-
-                            <Button
                                 type="submit"
                                 color="primary"
                                 variant="contained"
                                 endIcon={<KeyboardArrowRightIcon/>}
                             >
                                 Submit
+                            </Button>
+                            <Button
+                                color="warning"
+                                variant="contained"
+                                onClick={handleDelete}
+                                endIcon={<DeleteOutlinedIcon/>}
+                            >
+                                Delete
                             </Button>
                         </Box>
 
