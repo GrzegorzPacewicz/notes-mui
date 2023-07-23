@@ -48,6 +48,12 @@ const CreateNote = () => {
         <Container>
             <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
                 Create a New Note
+                {titleError || detailsError ? (
+                    <Typography variant="body2" color="error">
+                        {titleError && "Please enter a title. "}
+                        {detailsError && "Please enter details."}
+                    </Typography>
+                ) : null}
             </Typography>
 
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>

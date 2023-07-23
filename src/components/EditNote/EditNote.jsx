@@ -1,15 +1,26 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Container, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
+import {
+    Box,
+    Button,
+    Container,
+    FormControlLabel,
+    FormLabel,
+    Paper,
+    Radio,
+    RadioGroup,
+    Typography
+} from "@mui/material";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { StyledFormControl, StyledTextField } from "../../pages/CreateNote/styled.jsx";
 
 const EditNote = () => {
     const {id} = useParams();
     const [note, setNote] = useState(null);
     const navigate = useNavigate();
-    const [validationError, setValidationError] = useState(null);
+    const [titleError, setTitleError] = useState(false);
+    const [detailsError, setDetailsError] = useState(false);
 
     const fetchNoteById = useCallback(() => {
         try {
@@ -43,24 +54,31 @@ const EditNote = () => {
 
     const handleEdit = (event) => {
         event.preventDefault();
+        setTitleError(false);
+        setDetailsError(false);
 
-        if (!note.title.trim() || !note.details.trim()) {
-            setValidationError("Please fill in both the title and details.");
-            return;
+        if (note.title.trim() === '') {
+            setTitleError(true);
         }
 
-        try {
-            const notes = JSON.parse(localStorage.getItem("notes")) || [];
-            const noteIndex = notes.findIndex((note) => note.id === id);
-            if (noteIndex !== -1) {
-                notes[noteIndex] = note;
-                localStorage.setItem("notes", JSON.stringify(notes));
-                navigate("/");
-            } else {
-                console.log("Note not found.");
+        if (note.details.trim() === '') {
+            setDetailsError(true);
+        }
+
+        if (note.title.trim() && note.details.trim()) {
+            try {
+                const notes = JSON.parse(localStorage.getItem("notes")) || [];
+                const noteIndex = notes.findIndex((note) => note.id === id);
+                if (noteIndex !== -1) {
+                    notes[noteIndex] = note;
+                    localStorage.setItem("notes", JSON.stringify(notes));
+                    navigate("/");
+                } else {
+                    console.log("Note not found.");
+                }
+            } catch (error) {
+                console.error("Error updating note:", error);
             }
-        } catch (error) {
-            console.error("Error updating note:", error);
         }
     };
 
@@ -82,13 +100,13 @@ const EditNote = () => {
                 <Container>
                     <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
                         Edit the Note
+                        {titleError || detailsError ? (
+                            <Typography variant="body2" color="error">
+                                {titleError && "Please enter a title. "}
+                                {detailsError && "Please enter details."}
+                            </Typography>
+                        ) : null}
                     </Typography>
-
-                    {validationError && (
-                        <Typography variant="body2" color="error" gutterBottom>
-                            {validationError}
-                        </Typography>
-                    )}
 
                     <form noValidate autoComplete="off" onSubmit={handleEdit}>
                         <StyledTextField
@@ -130,23 +148,26 @@ const EditNote = () => {
                             </RadioGroup>
                         </StyledFormControl>
 
-                        <Button
-                            type="submit"
-                            color="primary"
-                            variant="contained"
-                            endIcon={<KeyboardArrowRightIcon/>}
-                        >
-                            Submit
-                        </Button>
-                        <Button
-                            color="warning"
-                            variant="contained"
-                            onClick={handleDelete}
-                            style={{marginLeft: "1rem"}}
-                            endIcon={<DeleteOutlinedIcon/>}
-                        >
-                            Delete
-                        </Button>
+                        <Box sx={{display: 'flex', justifyContent: 'left', gap: "1rem"}}>
+                            <Button
+                                color="warning"
+                                variant="contained"
+                                onClick={handleDelete}
+                                endIcon={<DeleteOutlinedIcon/>}
+                            >
+                                Delete
+                            </Button>
+
+                            <Button
+                                type="submit"
+                                color="primary"
+                                variant="contained"
+                                endIcon={<KeyboardArrowRightIcon/>}
+                            >
+                                Submit
+                            </Button>
+                        </Box>
+
                     </form>
                 </Container>
             ) : (
