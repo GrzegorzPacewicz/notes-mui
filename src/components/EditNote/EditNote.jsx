@@ -84,7 +84,7 @@ const EditNote = () => {
     };
 
     return (
-        <div>
+        <>
             {note ? (
                 <Container>
                     <Typography variant="h6" component="h2" color="textSecondary" gutterBottom>
@@ -161,7 +161,7 @@ const EditNote = () => {
             ) : (
                 <p>Loading...</p>
             )}
-        </div>
+        </>
     );
 };
 
